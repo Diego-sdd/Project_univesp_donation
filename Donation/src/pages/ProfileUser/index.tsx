@@ -20,6 +20,8 @@ const Profile = (props: any) => {
   const navigation = useNavigation();
 
   const [typeUser, setTypeUser] = useState('');
+  const [updateInfo, setUpdateInfo] = useState(false);
+
   useEffect(() => {
     let profile = userReducer?.data?.profile;
     switch (profile) {
@@ -57,11 +59,43 @@ const Profile = (props: any) => {
 
         <View style={styles.ItemOptions}>
           <TouchableOpacity>
-            <Text style={styles.ItensOptions}>Editar Perfil</Text>
+            <Text
+              style={styles.ItensOptions}
+              onPress={() => {
+                if (!updateInfo) {
+                  setUpdateInfo(true);
+                } else {
+                  setUpdateInfo(false);
+                }
+              }}>
+              Editar Perfil
+            </Text>
           </TouchableOpacity>
+          {updateInfo && (
+            <View style={{marginBottom: 10}}>
+              <TouchableOpacity>
+                <Text
+                  style={styles.ItensOptionsSubTitle}
+                  onPress={() => {
+                    navigation.navigate('PersonalInformation');
+                  }}>
+                  Dados Pessoais
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={styles.ItensOptionsSubTitle}>Endereço</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
           <TouchableOpacity>
             <Text style={styles.ItensOptions}>Excluir conta</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={styles.ItensOptions}>Evento beneficente</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => {
               ResetUserRedux();
@@ -70,7 +104,15 @@ const Profile = (props: any) => {
             }}>
             <Text style={styles.ItensOptions}>Sair</Text>
           </TouchableOpacity>
+
+          <Text style={{
+            position: 'absolute',
+            bottom: 0,
+            alignSelf: "center",
+          }}>Version 1.0.0</Text>
         </View>
+
+       
       </View>
     </KeyboardAvoidingView>
   );

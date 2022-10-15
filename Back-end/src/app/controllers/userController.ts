@@ -149,19 +149,21 @@ class Users {
                 longitude,
                 hashPassword)
 
-
             if (resultInsert.length > 0) {
+
+                const resultUser = await GetUsersModel.getUserRegisterId(resultInsert[0])
+
                 return response.status(200).json({
                     body: {
                         user: {
-                            id: resultInsert[0].id,
-                            phone: resultInsert[0].phone,
-                            profile: resultInsert[0].profile,
-                            name: resultInsert[0].name,
-                            email: resultInsert[0].email,
-                            latitude: resultInsert[0].latitude,
-                            longitude: resultInsert[0].longitude,
-                            created_at: resultInsert[0].created_at,
+                            id: resultUser[0].id,
+                            phone: resultUser[0].phone,
+                            profile: resultUser[0].profile,
+                            name: resultUser[0].name,
+                            email: resultUser[0].email,
+                            latitude: resultUser[0].latitude,
+                            longitude: resultUser[0].longitude,
+                            created_at: resultUser[0].created_at,
                         },
                         token: generateToken({ id: resultInsert[0] })
                     }

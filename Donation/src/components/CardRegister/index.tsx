@@ -68,7 +68,7 @@ const Card: React.FC<ButtonProps> = ({setStatusUser}) => {
   const [status, setStatus] = useState(0);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Selecione o que você deseja fazer no app</Text>
+      <Text style={styles.title}>Selecione o seu tipo de perfil</Text>
       <View style={styles.viewCard}>
         {array.map((e, k) => (
           <TouchableOpacity

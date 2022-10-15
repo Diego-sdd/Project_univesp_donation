@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { black } from 'react-native-paper/lib/typescript/styles/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 30,
     fontWeight: '700',
+    color: '#322153',
   },
 });
 export default styles;

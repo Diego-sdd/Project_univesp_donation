@@ -12,6 +12,7 @@ import {RectButton} from 'react-native-gesture-handler';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {maskPhone} from '../../utils/maskPhone';
 import {setRegisterUser as setRegisterUserRedux} from '../../redux/actions/registerUserAction';
 import Card from '../../components/CardRegister';
 import styles from './styles';
@@ -28,6 +29,10 @@ const Register = (props: any) => {
   const [password, setPassword] = useState('');
   const [statusUser, setStatusUser] = useState(0);
 
+  const [nameErro, setNameErro] = useState('');
+  const [phoneErro, setPhoneErro] = useState('');
+  const [passwordErro, setPasswordErro] = useState('');
+
   const handleNavigateAddress = () => {
     const dataUser = {
       profile,
@@ -36,8 +41,33 @@ const Register = (props: any) => {
       email,
       password,
     };
-    setRegisterUser(dataUser);
-    navigation.navigate('RegisterAddress');
+
+    let checkInput = 0;
+    if (name.length < 5) {
+      setNameErro('Digite seu nome e sobrenome');
+      checkInput = +1;
+    } else {
+      setNameErro('');
+    }
+
+    if (phone.length < 11) {
+      setPhoneErro('Digite o telefone corretamente');
+      checkInput = +1;
+    } else {
+      setPhoneErro('');
+    }
+
+    if (password.length < 5) {
+      setPasswordErro('Digite a senha corretamente, pelo menos 5 caracteres');
+      checkInput = +1;
+    } else {
+      setPasswordErro('');
+    }
+
+    if (checkInput === 0) {
+      setRegisterUser(dataUser);
+      navigation.navigate('RegisterAddress');
+    }
   };
 
   useEffect(() => {
@@ -83,25 +113,47 @@ const Register = (props: any) => {
             <>
               <Text style={styles.titleInput}>Nome*</Text>
               <TextInput
-                style={styles.input}
-                placeholder="Senha"
+                style={{
+                  ...styles.input,
+                  borderWidth: nameErro !== '' ? 1 : 0,
+                  borderColor: nameErro !== '' ? '#ea4646' : '',
+                }}
+                placeholder="Nome"
                 value={name}
                 autoCorrect={false}
                 onChangeText={setName}
               />
+              <Text style={styles.ErroInput}>{nameErro}</Text>
 
               <Text style={styles.titleInput}>Telefone*</Text>
               <TextInput
-                style={styles.input}
+                style={{
+                  ...styles.input,
+                  borderWidth: phoneErro !== '' ? 1 : 0,
+                  borderColor: phoneErro !== '' ? '#ea4646' : '',
+                }}
                 placeholder="Telefone"
                 value={phone}
                 autoCorrect={false}
-                onChangeText={setPhone}
+                maxLength={16}
+                autoCapitalize="characters"
+                onChangeText={(el: string) => {
+                  try {
+                    let valuePhone = maskPhone(el);
+                    setPhone(valuePhone);
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+                keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
               />
+              <Text style={styles.ErroInput}>{phoneErro}</Text>
 
               <Text style={styles.titleInput}>Email</Text>
               <TextInput
-                style={styles.input}
+                style={{
+                  ...styles.input,
+                }}
                 placeholder="Email"
                 value={email}
                 autoCorrect={false}
@@ -111,10 +163,13 @@ const Register = (props: any) => {
                 <>
                   <Text style={styles.titleInput}>CNPJ</Text>
                   <TextInput
-                    style={styles.input}
+                    style={{
+                      ...styles.input,
+                    }}
                     placeholder="CNPJ"
                     // value={city}
                     autoCorrect={false}
+                    keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
                     // onChangeText={setCity}
                   />
                 </>
@@ -158,23 +213,18 @@ const Register = (props: any) => {
 
               <Text style={styles.titleInput}>Digite sua senha *</Text>
               <TextInput
-                style={styles.input}
+                style={{
+                  ...styles.input,
+                  borderWidth: passwordErro !== '' ? 1 : 0,
+                  borderColor: passwordErro !== '' ? '#ea4646' : '',
+                }}
                 placeholder="Senha"
                 value={password}
                 secureTextEntry={true}
                 autoCorrect={false}
                 onChangeText={setPassword}
               />
-
-              <Text style={styles.titleInput}>Confirme sua senha *</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Senha"
-                secureTextEntry={true}
-                value={password}
-                autoCorrect={false}
-                onChangeText={setPassword}
-              />
+              <Text style={styles.ErroInput}>{passwordErro}</Text>
 
               <RectButton style={styles.button} onPress={handleNavigateAddress}>
                 <View style={styles.buttonIcon}>

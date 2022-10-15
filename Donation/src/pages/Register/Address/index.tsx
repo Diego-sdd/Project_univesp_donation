@@ -46,7 +46,7 @@ const RegisterAddress = (props: any) => {
   const handlerRegister = async () => {
     console.log(registerUserReducer);
     const data = {
-      phone: registerUserReducer?.phone,
+      phone: registerUserReducer?.phone.replace(/\D/gim, ''),
       password: registerUserReducer?.password,
       profile: registerUserReducer?.profile,
       name: registerUserReducer?.name,
@@ -76,12 +76,16 @@ const RegisterAddress = (props: any) => {
           created_at: result.data?.body?.user?.created_at,
         });
         navigation.navigate('Home');
+
+        
       } else {
         console.log('erro');
       }
     } catch (error) {
       console.log(error);
     }
+
+    return
     // setConfirmVisible(true);
     // setNavigationSuccess(true);
   };
@@ -144,7 +148,7 @@ const RegisterAddress = (props: any) => {
           </View>
 
           <TouchableHighlight
-            underlayColor="#DDDDDD"
+            underlayColor="#343434"
             style={styles.containerAlterAddress}
             onPress={() => {
               setStreet('');

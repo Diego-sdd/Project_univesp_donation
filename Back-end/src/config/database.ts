@@ -1,7 +1,9 @@
+import { config } from "dotenv"
+config()
 export default {
-    host: '192.168.1.5',
-    user: 'root',
-    password: 'root',
-    database: 'db_univesp_donation',
-    port: '3308'
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_DATABASE_PORT,
 }

@@ -70,6 +70,14 @@ class UserModel {
         return resultUser
     }
 
+    async getUserRegisterId(id: Number) {
+        const resultUser = await knex('tb_users')
+            .select('*')
+            .where('id', id)
+
+        return resultUser
+    }
+
 }
 
 export default new UserModel()

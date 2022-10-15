@@ -72,7 +72,6 @@ const RegisterUser = (props: any) => {
         setTypeMessage('erro');
         setErro(true);
       }
-      // navigation.navigate('Home');
     } catch (error) {
       console.log(error);
     }
@@ -89,14 +88,15 @@ const RegisterUser = (props: any) => {
             marginTop: 80,
           }}>
           <View style={styles.main}>
-            <Image
-              source={ImageLogo}
-              style={{
-                width: '40%',
-                height: 60,
-                resizeMode: 'stretch',
-              }}
-            />
+            <View style={styles.viewLogo}>
+              <Text style={styles.textLogo}>
+                Doe 
+              </Text>
+              <Text style={styles.subtextLogo}>
+                + 
+              </Text>
+            </View>
+             
             <View>
               <Text style={styles.title}>Bora fazer o bem ao próximo?</Text>
               <Text style={styles.description}>
@@ -123,6 +123,7 @@ const RegisterUser = (props: any) => {
                   console.log(error);
                 }
               }}
+              keyboardType={Platform.OS === 'ios' ? "number-pad" : "numeric" }
             />
 
             <Text style={styles.titleInput}>Senha</Text>
@@ -178,7 +179,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 32,
   },
-
+  viewLogo: {
+    flexDirection: 'row'
+  },
+  textLogo: {
+    color: '#ed3b3b',
+    fontSize: 40,
+    fontWeight: 'bold'
+  },
+  subtextLogo: {
+    color: '#2f2828',
+    fontSize: 40,
+    marginLeft: 10,
+    marginTop: 1,
+    fontWeight: 'bold'
+  },
   main: {
     flex: 1,
     justifyContent: 'center',

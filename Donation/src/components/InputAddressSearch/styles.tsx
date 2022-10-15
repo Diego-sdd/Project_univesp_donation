@@ -24,9 +24,11 @@ export const AddressSearch = styled(GooglePlacesAutocomplete).attrs({
       fontSize: 17,
       paddingHorizontal: 10,
       height: 48,
+      color: '#5c5c5c'
     },
     description: {
       fontWeight: 'bold',
+      color: '#707070'
     },
     predefinedPlacesDescription: {
       color: '#1faadb',

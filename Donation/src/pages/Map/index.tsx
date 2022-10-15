@@ -113,6 +113,7 @@ const Map = (props: any) => {
                 longitudeDelta: 5.114,
               }}>
               {/*  {selectedItems[0] !== undefined &&*/}
+              {console.log(points)}
               {points.map(point => (
                 <Marker
                   key={String(point.id)}

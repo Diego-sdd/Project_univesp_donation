@@ -6,23 +6,25 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Container from './pages/NavigationTab';
 
 //Login
-import Home from './pages/Home';
-import Login from './pages/Login';
+import LoginScreen from './pages/Login';
 
 //Register
 import Register from './pages/Register';
 import RegisterAddress from './pages/Register/Address';
 
+//Update
+import PersonalInformation from './pages/UpdateUserInfo/PersonalInformation';
+
 //Profile
 import Profile from './pages/Map/Profile';
 
 export type RootStackParamList = {
-  Home: undefined;
   Login: undefined;
   Register: undefined;
   RegisterAddress: undefined;
   Container: undefined;
   Profile: undefined;
+  PersonalInformation: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -53,9 +55,8 @@ const Routes = (props: any) => {
             cardStyle: {
               backgroundColor: '#f0f0f5',
             },
-          }}
-          >
-          <Stack.Screen name="Login" component={Login} />
+          }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="RegisterAddress" component={RegisterAddress} />
         </Stack.Navigator>
@@ -70,6 +71,11 @@ const Routes = (props: any) => {
             }}>
             <Stack.Screen name="Container" component={Container} />
             <Stack.Screen name="Profile" component={Profile} />
+
+            <Stack.Screen
+              name="PersonalInformation"
+              component={PersonalInformation}
+            />
           </Stack.Navigator>
         </>
       )}

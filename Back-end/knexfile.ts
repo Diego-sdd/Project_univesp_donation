@@ -1,4 +1,4 @@
-import databaseConfig from '@config/database'
+import databaseConfig from './src/config/database'
 
 export default {
     client: 'mysql',
@@ -9,7 +9,7 @@ export default {
         max: 10
     },
     migrations: {
-        directory: './migrations',
+        directory: './src/database/migrations',
         tableName: 'knex_migrations'
     }
 }

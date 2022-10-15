@@ -10,11 +10,13 @@ export async function up(knex: Knex): Promise<void> {
         table.string('profile', 50)
         table.string('name', 100)
         table.string('email', 100)
+        table.string('cnpj', 20)
+        table.json('receiving').defaultTo([]);;
         table.string('latitude', 100)
         table.string('longitude', 100)
         table.integer('fk_address').unsigned().references('id').inTable('tb_address')
         table.timestamp('created_at').defaultTo(knex.fn.now())
-        table.timestamp('deleted_at').defaultTo(null)
+        table.timestamp('deleted_at').defaultTo(knex.fn.now())
     })
 }
 

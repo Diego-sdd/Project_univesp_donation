@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import * as colorsJson from '../../../utils/color.json';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,17 +11,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginTop: 54,
-    color: '#6C6C80',
+    color: colorsJson.title,
   },
 
   description: {
-    color: '#6C6C80',
+    color: colorsJson.text,
     fontSize: 16,
     marginTop: 4,
     marginBottom: 50,
   },
   titleInput: {
-    color: '#322153',
+    color: colorsJson.title,
     margin: 8,
     fontSize: 16,
   },
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 0,
     alignSelf: 'center',
-    backgroundColor: '#ed3b3b',
+    backgroundColor: colorsJson.primary,
     height: 60,
     flexDirection: 'row',
     borderRadius: 10,
@@ -48,16 +49,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  
   buttonText: {
     flex: 0.8,
     justifyContent: 'center',
     marginLeft: '24%',
-    color: '#FFF',
+    color: colorsJson.white,
     fontSize: 16,
   },
   textSucess: {
-    color: '#36b143',
+    color: colorsJson.sucess,
     fontWeight: '700',
     fontSize: 18,
     textAlign: 'center',
@@ -79,11 +80,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 0.2,
     marginTop: 50,
-    marginBottom: 20
+    marginBottom: 20,
   },
   fontAddress: {
     fontSize: 20,
-    fontWeight: "bold"
-  }
+    fontWeight: 'bold',
+    color: colorsJson.title,
+    marginBottom: 4,
+    marginTop: 6
+  },
 });
 export default styles;

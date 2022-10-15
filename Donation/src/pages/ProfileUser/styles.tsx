@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import * as colorsJson from '../../utils/color.json';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,6 +47,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
+  },
+  ItensOptionsSubTitle: {
+    fontSize: 17,
+    marginLeft: 10,
+    marginTop: 5,
+    color: colorsJson.text
   }
 });
 export default styles;
