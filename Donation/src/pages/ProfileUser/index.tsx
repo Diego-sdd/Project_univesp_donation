@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-
+import DefaultImageUser from '../../assets/RegisterUser/defaultprofileimage.png';
 import {reset as ResetJWTRedux} from '../../redux/actions/authActions';
 import {reset as ResetUserRedux} from '../../redux/actions/userActions';
 
@@ -45,15 +45,19 @@ const Profile = (props: any) => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image
-            style={styles.imageUser}
-            source={{
-              uri: 'https://st4.depositphotos.com/1000975/24254/i/450/depositphotos_242548520-stock-photo-concept-of-charity-with-donated.jpg',
-            }}
-          />
+          {userReducer?.data !== undefined && (
+            <Image
+              style={styles.imageUser}
+              source={
+                JSON.parse(userReducer?.data?.profileImage)?.uri !== undefined
+                  ? {uri: `${JSON.parse(userReducer?.data?.profileImage)?.uri}`}
+                  : DefaultImageUser
+              }
+            />
+          )}
+
           <Text style={styles.titleName}>{userReducer?.data?.name}</Text>
           <Text style={styles.titleAge}>{typeUser}</Text>
-          <Text style={styles.titleAge}>25 anos</Text>
           <Text style={styles.titlePhone}>{userReducer?.data?.phone}</Text>
         </View>
 
@@ -96,6 +100,10 @@ const Profile = (props: any) => {
             <Text style={styles.ItensOptions}>Evento beneficente</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity>
+            <Text style={styles.ItensOptions}>Privacidade</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => {
               ResetUserRedux();
@@ -105,14 +113,15 @@ const Profile = (props: any) => {
             <Text style={styles.ItensOptions}>Sair</Text>
           </TouchableOpacity>
 
-          <Text style={{
-            position: 'absolute',
-            bottom: 0,
-            alignSelf: "center",
-          }}>Version 1.0.0</Text>
+          <Text
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              alignSelf: 'center',
+            }}>
+            Version 1.0.0
+          </Text>
         </View>
-
-       
       </View>
     </KeyboardAvoidingView>
   );

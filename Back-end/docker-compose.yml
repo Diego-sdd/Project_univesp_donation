@@ -3,10 +3,10 @@ version: "3.8"
 services:
   app:
     build: .
-    command: yarn dev
+    command: sh -c "npm install -g knex && knex migrate:latest && yarn dev"
     ports:
       - "3000:3000"
-     environment:
+    environment:
       - MYSQL_HOST=$MYSQL_HOST
       - MYSQL_USER=$MYSQL_USER
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
@@ -16,18 +16,3 @@ services:
     volumes:
       - .:/usr/app
 
-  db:
-    container_name: 'db_univesp_donation'
-    image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER --explicit_defaults_for_timestamp
-    restart: always
-    ports:
-      - '3306:3306'
-
-    environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-
-    volumes:
-    - ./db-dump:/docker-entrypoint-initdb.d
-    cap_add:
-      - SYS_NICE

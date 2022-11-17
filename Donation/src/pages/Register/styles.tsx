@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     borderColor: '#ed3b3b',
     width: '20%',
     alignSelf: 'center',
-    marginTop: 30,
-    marginBottom: 20,
+    marginTop: 50,
+    marginBottom: 50,
   },
   ErroInput: {
     color: 'red',

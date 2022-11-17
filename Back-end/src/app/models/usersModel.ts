@@ -15,8 +15,12 @@ class UserModel {
         numberAddress: String,
         latitude: String,
         longitude: String,
-        password: String) {
-
+        password: String,
+        profileImage: any,
+        receiving: any,
+        description: String,
+        cnpj: String,
+    ) {
         const fk_country = await knex('tb_country')
             .insert({
                 country
@@ -56,7 +60,11 @@ class UserModel {
                 email,
                 latitude,
                 longitude,
-                fk_address
+                fk_address,
+                profileImage: JSON.stringify(profileImage),
+                receiving: JSON.stringify(receiving),
+                description,
+                cnpj
             })
             .returning('*')
 

@@ -23,11 +23,12 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: '700',
     fontSize: 22,
-    marginTop: 20,
+    marginTop: 10,
   },
-  titleAge: {
+  titleProfile: {
     color: 'black',
     fontSize: 20,
+    marginTop: 20,
   },
   titlePhone: {
     color: 'black',
@@ -36,8 +37,13 @@ const styles = StyleSheet.create({
   contact: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: 30,
     width: '100%',
+  },
+  gridcontact: {
+    flexDirection: 'row', 
+    marginTop: 35,
+    marginBottom: 20,
+    marginLeft: 25
   },
   itensHelp: {
     flexDirection: 'row',

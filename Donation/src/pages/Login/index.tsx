@@ -65,8 +65,15 @@ const RegisterUser = (props: any) => {
           latitude: result.data?.body?.user?.latitude,
           longitude: result.data?.body?.user?.longitude,
           created_at: result.data?.body?.user?.created_at,
+          profileImage: result.data?.body?.user?.profileImage,
+          receiving: result.data?.body?.user?.receiving,
+          description: result.data?.body?.user?.description,
+          cnpj: result.data?.body?.user?.cnpj
         });
-        navigation.navigate('Home');
+        //console.log(result.data?.body?.user?.cnpj)
+        console.log("======================")
+        console.log("======================")
+        //navigation.navigate('Home');
       } else {
         setMessageErro('Senha ou e-mail estão incorretos');
         setTypeMessage('erro');

@@ -15,6 +15,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {maskPhone} from '../../utils/maskPhone';
 import {setRegisterUser as setRegisterUserRedux} from '../../redux/actions/registerUserAction';
 import Card from '../../components/CardRegister';
+import PhotoEdit from '../../components/PhotoEdit';
 import styles from './styles';
 
 const Register = (props: any) => {
@@ -33,6 +34,11 @@ const Register = (props: any) => {
   const [phoneErro, setPhoneErro] = useState('');
   const [passwordErro, setPasswordErro] = useState('');
 
+  const [profileImage, setProfileImage] = useState<string>('');
+  const [receiving, setReceiving] = useState<Array<string>>([]);
+  const [description, setDescription] = useState<string>('');
+  const [cnpj, setCnpj] = useState<string>('');
+
   const handleNavigateAddress = () => {
     const dataUser = {
       profile,
@@ -40,6 +46,10 @@ const Register = (props: any) => {
       phone,
       email,
       password,
+      profileImage,
+      receiving,
+      description,
+      cnpj
     };
 
     let checkInput = 0;
@@ -98,7 +108,7 @@ const Register = (props: any) => {
             Para continuar é preciso cadastrar alguns dados:
           </Text>
           <Text style={styles.description}>
-            Solicitamos os dados para poder enter qual o seu tipo de perfil
+            Queremos saber qual o seu perfil de usuário
           </Text>
 
           <View
@@ -111,6 +121,14 @@ const Register = (props: any) => {
 
           {statusUser > 0 && (
             <>
+              <View style={styles.line} />
+              <PhotoEdit
+                photo={profileImage}
+                setPhoto={(value: string) => {
+                  setProfileImage(value);
+                }}
+              />
+
               <Text style={styles.titleInput}>Nome*</Text>
               <TextInput
                 style={{
@@ -167,16 +185,41 @@ const Register = (props: any) => {
                       ...styles.input,
                     }}
                     placeholder="CNPJ"
-                    // value={city}
+                    value={cnpj}
                     autoCorrect={false}
-                    keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
-                    // onChangeText={setCity}
+                    keyboardType={
+                      Platform.OS === 'ios' ? 'number-pad' : 'numeric'
+                    }
+                    onChangeText={setCnpj}
                   />
                 </>
               )}
               {(statusUser === 2 || statusUser === 3) && (
                 <>
                   <View style={styles.line} />
+
+                  <Text style={styles.titleInput}>
+                    {statusUser === 2
+                      ? 'Sua história de vida'
+                      : 'Informações sobre o ponto de doação.'}
+                  </Text>
+                  <TextInput
+                    style={{
+                      ...styles.input,
+                    }}
+                    placeholder={
+                      statusUser === 2
+                        ? 'Você pode contar sua história de vida'
+                        : 'Você pode passar mais informações sobre o ponto de doação.'
+                    }
+                    value={description}
+                    autoCorrect={false}
+                    keyboardType={
+                      Platform.OS === 'ios' ? 'number-pad' : 'numeric'
+                    }
+                    onChangeText={setDescription}
+                  />
+
                   <Text style={styles.titleInput}>
                     Estou {statusUser === 2 ? 'precisando de' : 'recebendo'}:
                   </Text>
@@ -191,7 +234,19 @@ const Register = (props: any) => {
                     }}
                     iconStyle={{borderColor: '#ed3b3b'}}
                     textStyle={{fontFamily: 'JosefinSans-Regular'}}
-                    onPress={(isChecked: boolean) => {}}
+                    onPress={(isChecked: boolean) => {
+                      if (isChecked) {
+                        setReceiving(receiving => [...receiving, 'Roupa']);
+                      } else {
+                        let element: Array<string> = [];
+                        receiving.map(e => {
+                          if (e !== 'Roupa') {
+                            element.push(e);
+                          }
+                        });
+                        setReceiving(element);
+                      }
+                    }}
                   />
                   <BouncyCheckbox
                     size={25}
@@ -204,7 +259,19 @@ const Register = (props: any) => {
                     }}
                     iconStyle={{borderColor: '#ed3b3b'}}
                     textStyle={{fontFamily: 'JosefinSans-Regular'}}
-                    onPress={(isChecked: boolean) => {}}
+                    onPress={(isChecked: boolean) => {
+                      if (isChecked) {
+                        setReceiving(receiving => [...receiving, 'Alimento']);
+                      } else {
+                        let element: Array<string> = [];
+                        receiving.map(e => {
+                          if (e !== 'Alimento') {
+                            element.push(e);
+                          }
+                        });
+                        setReceiving(element);
+                      }
+                    }}
                   />
                 </>
               )}

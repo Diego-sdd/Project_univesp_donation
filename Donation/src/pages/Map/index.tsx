@@ -45,13 +45,13 @@ const Map = (props: any) => {
   const [items, setItems] = useState<Item[]>([]);
   const [points, setPoints] = useState([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
+  const [valueZoom, setValueZoom] = useState(0)
   const [initialPosition, setInitialPosition] = useState<[number, number]>([
     -23.964962, -46.391733,
   ]);
 
   const navigation = useNavigation();
-  console.log(points);
+
   const handlerUsers = async () => {
     try {
       const result = await UserMapApp(userReducer.profile);
@@ -60,13 +60,11 @@ const Map = (props: any) => {
         let arrayValue: any = [];
         result.data.resultData.map((e: any, k: number) => {
           arrayValue.push({
-            id: k,
+            id: e.id,
             latitude: Number(e.latitude),
             longitude: Number(e.longitude),
             userType: e.profile,
             name: e.name,
-            image_url:
-              'https://st4.depositphotos.com/1000975/24254/i/450/depositphotos_242548520-stock-photo-concept-of-charity-with-donated.jpg',
           });
         });
         setPoints(arrayValue);
@@ -98,7 +96,6 @@ const Map = (props: any) => {
     }
   }
 
-  
   return (
     <>
       <View style={styles.container}>
@@ -109,11 +106,24 @@ const Map = (props: any) => {
               initialRegion={{
                 latitude: initialPosition[0],
                 longitude: initialPosition[1],
-                latitudeDelta: 5.114,
-                longitudeDelta: 5.114,
+                latitudeDelta: 0,
+                longitudeDelta: 0,
+              }}
+              onRegionChangeComplete={async (region) => {
+                setValueZoom(
+                  Math.round(Math.log(360 / region.longitudeDelta) / Math.LN2)
+                  );
+              }}
+              initialCamera={{
+                center: {
+                  latitude: -23.950254,
+                  longitude: -46.404299,
+                },
+                zoom: 13,
+                pitch: 0,
+                heading: 0,
+                altitude: 1000,
               }}>
-              {/*  {selectedItems[0] !== undefined &&*/}
-              {console.log(points)}
               {points.map(point => (
                 <Marker
                   key={String(point.id)}
@@ -122,23 +132,28 @@ const Map = (props: any) => {
                   coordinate={{
                     latitude: point.latitude,
                     longitude: point.longitude,
-                  }}>
+                  }}
+                  anchor={{ x: 0.5, y: 0.40 }}
+                  centerOffset={{x: -18, y: -60}}>
                   {point.userType === 'needHelp' && (
                     <Image
                       style={styles.mapMarkerImageHelp}
                       source={IconHelp}
+                      resizeMode="contain"
                     />
                   )}
                   {point.userType === 'pointDonation' && (
                     <Image
                       style={styles.mapMarkerImageHelp}
                       source={IconHelp}
+                      resizeMode="contain"
                     />
                   )}
                   {point.userType === 'institution' && (
                     <Image
                       style={styles.mapMarkerImageHelp}
                       source={IconInstitution}
+                      resizeMode="contain"
                     />
                   )}
                 </Marker>

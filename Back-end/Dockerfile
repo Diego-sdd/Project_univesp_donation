@@ -3,12 +3,11 @@ FROM node:alpine
 WORKDIR /usr/app
 
 COPY package*.json ./
-RUN yarn install
 
-npx knex migrate:latest
+RUN yarn install
 
 COPY . .
 
 EXPOSE 3000 
 
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]

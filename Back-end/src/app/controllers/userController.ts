@@ -82,7 +82,11 @@ class Users {
             country,
             numberAddress,
             latitude,
-            longitude
+            longitude,
+            profileImage,
+            receiving,
+            description,
+            cnpj,
         } = request.body
 
         const errors = validationResult(request)
@@ -147,7 +151,11 @@ class Users {
                 numberAddress,
                 latitude,
                 longitude,
-                hashPassword)
+                hashPassword,
+                profileImage,
+                receiving,
+                description,
+                cnpj)
 
             if (resultInsert.length > 0) {
 
@@ -164,6 +172,10 @@ class Users {
                             latitude: resultUser[0].latitude,
                             longitude: resultUser[0].longitude,
                             created_at: resultUser[0].created_at,
+                            profileImage: resultUser[0].profileImage,
+                            receiving: resultUser[0].receiving,
+                            description: resultUser[0].description,
+                            cnpj: resultUser[0].cnpj,
                         },
                         token: generateToken({ id: resultInsert[0] })
                     }

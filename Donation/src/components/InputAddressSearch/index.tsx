@@ -31,7 +31,7 @@ const InputAddressSearch: React.FC<Type> = ({required, onPress, label}) => {
         getDefaultValue={() => ''}
         enablePoweredByContainer={false}
         query={{
-          key: 'AIzaSyDZsIm0N2GgKqnsPWbbrgxmMGGt0MKpJ7Y',
+          key: 'AIzaSyCHDS5qnm8RiytXmA_e17daFrnaiQ957z4',
           language: 'pt-BR', // language of the results
         }}
         nearbyPlacesAPI="GooglePlacesSearch" // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch

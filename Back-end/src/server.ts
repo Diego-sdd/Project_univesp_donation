@@ -1,7 +1,8 @@
 import express from 'express'
 import routesV1 from '@routes/v1/routes'
 
-const port = 3000
+const port = Number(process.env.PORT) || 3000
+
 const host = '0.0.0.0'
 
 const app = express()

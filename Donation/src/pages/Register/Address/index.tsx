@@ -44,7 +44,7 @@ const RegisterAddress = (props: any) => {
   }, [confirmVisible]);
 
   const handlerRegister = async () => {
-    console.log(registerUserReducer);
+    
     const data = {
       phone: registerUserReducer?.phone.replace(/\D/gim, ''),
       password: registerUserReducer?.password,
@@ -59,6 +59,10 @@ const RegisterAddress = (props: any) => {
       numberAddress: streetNumber,
       latitude,
       longitude,
+      profileImage: registerUserReducer?.profileImage,
+      receiving: registerUserReducer?.receiving,
+      description: registerUserReducer?.description,
+      cnpj: registerUserReducer?.cnpj,
     };
     try {
       const result = await RegisterUserApp(data);
@@ -74,6 +78,10 @@ const RegisterAddress = (props: any) => {
           latitude: result.data?.body?.user?.latitude,
           longitude: result.data?.body?.user?.longitude,
           created_at: result.data?.body?.user?.created_at,
+          profileImage: result.data?.body?.user?.profileImage,
+          receiving: result.data?.body?.user?.receiving,
+          description: result.data?.body?.user?.description,
+          cnpj: result.data?.body?.user?.cnpj,
         });
         navigation.navigate('Home');
 
@@ -82,6 +90,7 @@ const RegisterAddress = (props: any) => {
         console.log('erro');
       }
     } catch (error) {
+      console.log('erro');
       console.log(error);
     }
 

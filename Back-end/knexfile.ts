@@ -2,7 +2,7 @@ import databaseConfig from './src/config/database'
 
 export default {
     client: 'mysql',
-    connection: { ...databaseConfig, ssd: true },
+    connection: { ...databaseConfig, ssd: false },
     searchPath: ['public'],
     pool: {
         min: 2,
